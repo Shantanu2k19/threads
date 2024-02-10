@@ -1,0 +1,17 @@
+(base) zodiac@zodiac-book:~/Desktop/threads$ ls
+(base) zodiac@zodiac-book:~/Desktop/threads$ npx create-next-app@latest ./
+Need to install the following packages:
+  create-next-app@14.1.0
+Ok to proceed? (y) y
+✔ Would you like to use TypeScript? … No / Yes
+✔ Would you like to use ESLint? … No / Yes
+✔ Would you like to use Tailwind CSS? … No / Yes
+✔ Would you like to use `src/` directory? … No / Yes
+✔ Would you like to use App Router? (recommended) … No / Yes
+✔ Would you like to customize the default import alias (@/*)? … No / Yes
+
+
+npm install @clerk/nextjs @uploadthing/react mongoose svix uploadthing 
+
+
+ npm install tailwindcss-animate
