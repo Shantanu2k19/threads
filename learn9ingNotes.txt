@@ -12,4 +12,6 @@ This application :
 
 
 
+
+
 #npm install @clerk/nextjs @uploadthing/react mongo ose svix uploadthing
