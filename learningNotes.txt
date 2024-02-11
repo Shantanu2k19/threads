@@ -1,0 +1,29 @@
+
+###################################################################
+Project commands 
+###################################################################
+
+#npx create-next-app@latest ./
+
+√ Would you like to use TypeScript? ... No / Yes
+√ Would you like to use ESLint? ... No / Yes
+√ Would you like to use Tailwind CSS? ... No / Yes
+√ Would you like to use `src/` directory? ... No / Yes
+√ Would you like to use App Router? (recommended) ... No / Yes
+√ Would you like to customize the default import alias (@/*)? ... No / Yes
+
+
+#npm install @clerk/nextjs @uploadthing/react mongoose svix uploadthing
+#npm install tailwindcss-animate
+
+npm run dev 
+
+
+
+###################################################################
+NOTES
+###################################################################
+
+Route groups : (folderName) : In the app directory, nested folders are normally mapped to URL paths. 
+However, you can mark a folder as a Route Group to prevent the folder from being included in the route's URL path.
+-allows you to organize your route segments and project files into logical groups without affecting the URL path structure.
