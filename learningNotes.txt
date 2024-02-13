@@ -18,7 +18,7 @@ Project commands
 
 npm run dev 
 
-
+ npm install all @clerk/themes
 
 ###################################################################
 NOTES
