@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 function Bottombar() {
     const pathname = usePathname();
-
+    console.log('lol', pathname);
     return (
         <section className="bottombar">
             <div className="bottombar_container">
