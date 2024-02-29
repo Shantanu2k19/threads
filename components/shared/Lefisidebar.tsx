@@ -1,29 +1,30 @@
-"use client"
+'use client'
+import React from 'react'
 
-import {sidebarLinks} from "@/constants";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { Console } from "console";
-import { SignOutButton, SignedIn} from "@clerk/nextjs";
+import { sidebarLinks } from '@/constants'
+import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
+// import { Console } from 'console'
+import { SignOutButton, SignedIn } from '@clerk/nextjs'
 
-function LeftSidebar() {
-    const router = useRouter();
-    const pathname = usePathname();
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function LeftSidebar () {
+  const router = useRouter()
+  const pathname = usePathname()
 
-    return (
+  return (
     <section className="custom-scrollbar leftsidebar">
-        <div className="flex w-full flex-1 
+        <div className="flex w-full flex-1
         flex-col gap-6 px-6">
-            {sidebarLinks.map((link)=>{
+            {sidebarLinks.map((link) => {
+              // if link is connectly active
+              const isActive =
+                (pathname.includes(link.route) && link.route.length > 1) ||
+                pathname === link.route
 
-                //if link is connectly active 
-                const isActive = 
-                (pathname.includes(link.route) && link.route.length>1) 
-                || pathname===link.route;
-
-                return (
-                <Link 
+              return (
+                <Link
                     href={link.route}
                     key={link.label}
                     className=
@@ -39,14 +40,13 @@ function LeftSidebar() {
                     <p className="text-light-1
                     max-lg:hidden">{link.label}</p>
                 </Link>
-                )
-                })}
+              )
+            })}
         </div>
 
         <div className="mt-10 px-6">
             <SignedIn>
-                <SignOutButton signOutCallback={()=>
-                    router.push('/sign-in')
+                <SignOutButton signOutCallback={() => { router.push('/sign-in') }
                 }>
                     <div className="flex cursor-pointer gap-4 p-4">
                         <Image src="/assets/logout.svg"
@@ -63,6 +63,7 @@ function LeftSidebar() {
             </SignedIn>
         </div>
     </section>
-)}
+  )
+}
 
-export default LeftSidebar;
+export default LeftSidebar

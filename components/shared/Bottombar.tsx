@@ -1,25 +1,28 @@
-"use client"
+/* eslint-disable @typescript-eslint/indent */
+'use client'
+import React from 'react'
 
-import { sidebarLinks } from "@/constants";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { sidebarLinks } from '@/constants'
+import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
-function Bottombar() {
-    const pathname = usePathname();
-    console.log('lol', pathname);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function Bottombar () {
+    const pathname = usePathname()
+    console.log('lol', pathname)
+
     return (
         <section className="bottombar">
             <div className="bottombar_container">
-            {sidebarLinks.map((link)=>{
-
-                //if link is connectly active 
-                const isActive = 
-                (pathname.includes(link.route) && link.route.length>1) 
-                || pathname===link.route;
+            {sidebarLinks.map((link) => {
+                // if link is connectly active
+                const isActive =
+                (pathname.includes(link.route) && link.route.length > 1) ||
+                pathname === link.route
 
                 return (
-                <Link 
+                <Link
                     href={link.route}
                     key={link.label}
                     className=
@@ -42,4 +45,4 @@ function Bottombar() {
     )
 }
 
-export default Bottombar;
+export default Bottombar

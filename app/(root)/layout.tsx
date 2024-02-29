@@ -1,25 +1,27 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../globals.css";
-import { ClerkProvider } from "@clerk/nextjs"
+import React from 'react'
+
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import '../globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
+
+import LeftSidebar from '@/components/shared/Lefisidebar'
+import Rightsidebar from '@/components/shared/Rightsidebar'
+import Topbar from '@/components/shared/Topbar'
+import Bottombar from '@/components/shared/Bottombar'
 
 
-import LeftSidebar from "@/components/shared/Lefisidebar";
-import Rightsidebar from "@/components/shared/Rightsidebar";
-import Topbar from "@/components/shared/Topbar";
-import Bottombar from "@/components/shared/Bottombar";
-
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Threads',
-  description : 'A next js 13 threads clone for learning mern'
+  description: 'A next js 13 threads clone for learning mern'
 }
 
-export default function RootLayout({
-  children,
+export default function RootLayout ({
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <ClerkProvider>
@@ -42,6 +44,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  );
-} 
-
+  )
+}
