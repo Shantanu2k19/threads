@@ -23,7 +23,7 @@ npx shadcn-ui@latest add form
 //have to do installation first
 npx shadcn-ui@latest init
 >npx shadcn-ui@latest add input
-
+ npx shadcn-ui@latest add textarea
 ###################################################################
 NOTES
 ###################################################################
