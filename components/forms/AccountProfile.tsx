@@ -6,6 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserValidation } from '@/lib/validations/user'
 import Image from 'next/image'
 import type * as z from 'zod' // using shadcn
+import { isBase64Image } from '@/lib/utils'
+import { useUploadThing } from '@/lib/uploadThing'
 
 import {
   Form,
@@ -34,13 +36,14 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
-  console.log(user);
+  console.log(user)
   const [files, setFiles] = useState<File[]>([])
+  const { startUpload } = useUploadThing('media')
 
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      profile_photo:  '',  //Insert photo from user.image
+      profile_photo: '', // Insert photo from user.image
       name: user?.name || '',
       username: user?.username || '',
       bio: user?.bio || ''
@@ -49,7 +52,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
     e.preventDefault()
-    const fileReader = new FileReader();
+    const fileReader = new FileReader()
 
     if ((e.target.files != null) && e.target.files.length > 0) {
       const file = e.target.files[0]
@@ -68,8 +71,22 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
   }
 
-  function onSubmit (values: z.infer<typeof UserValidation>) {
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    console.log('submitted :', values)
+
+    const blob = values.profile_photo
+
+    const hasImageChanged = isBase64Image(blob) // how?
+
+    if (hasImageChanged) {
+      const imRes = await startUpload(files)
+
+      if (imRes?.[0].url) {
+        values.profile_photo = imRes[0].url
+      }
+    }
+
+    //TODO : update user profile backend
   }
 
   return (
