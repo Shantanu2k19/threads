@@ -31,3 +31,5 @@ NOTES
 Route groups : (folderName) : In the app directory, nested folders are normally mapped to URL paths.
 However, you can mark a folder as a Route Group to prevent the folder from being included in the route's URL path.
 -allows you to organize your route segments and project files into logical groups without affecting the URL path structure.
+
+npm install mongodb
