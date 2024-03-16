@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation'
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function Bottombar () {
     const pathname = usePathname()
-    console.log('lol', pathname)
+    console.log('current pathname-', pathname)
 
     return (
         <section className="bottombar">

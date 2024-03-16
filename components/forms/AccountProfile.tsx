@@ -8,6 +8,7 @@ import Image from 'next/image'
 import type * as z from 'zod' // using shadcn
 import { isBase64Image } from '@/lib/utils'
 import { useUploadThing } from '@/lib/uploadThing'
+import { usePathname, useRouter } from 'next/navigation'
 
 import {
   Form,
@@ -22,6 +23,7 @@ import {
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
+import { updateUser } from '@/lib/actions/user.actions'
 
 interface Props {
   user: {
@@ -36,9 +38,11 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
-  console.log(user)
+  //console.log(user)
   const [files, setFiles] = useState<File[]>([])
   const { startUpload } = useUploadThing('media')
+  const router = useRouter()
+  const pathname = usePathname()
 
   const form = useForm({
     resolver: zodResolver(UserValidation),
@@ -51,6 +55,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   })
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
+    console.log("got image")
     e.preventDefault()
     const fileReader = new FileReader()
 
@@ -66,27 +71,51 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         fieldChange(imageDataUrl)
       }
-
       fileReader.readAsDataURL(file)
     }
   }
+
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     console.log('submitted :', values)
 
     const blob = values.profile_photo
-
     const hasImageChanged = isBase64Image(blob) // how?
+    if(hasImageChanged) 
+      console.log("Image has changed")
+    else
+      console.log("image havent changed")
 
-    if (hasImageChanged) {
-      const imRes = await startUpload(files)
+    try
+    {
+      if (hasImageChanged) {
+        const imRes = await startUpload(files)
 
-      if (imRes?.[0].url) {
-        values.profile_photo = imRes[0].url
+        if (imRes?.[0].url) {
+          values.profile_photo = imRes[0].url
+        }
       }
     }
+    catch (error)
+    {
+      console.log(`encountered error uploadthing : `+error)
+    }
 
-    //TODO : update user profile backend
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo,
+      path: pathname
+    })
+
+    if(pathname === '/profile/edit'){
+      router.back();
+    }
+    else {
+      router.push('/');
+    }
   }
 
   return (
@@ -131,6 +160,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                       onChange={(e) => { handleImage(e, field.onChange) }}
                     />
                  </FormControl>
+                 <FormItem />
                </FormItem>
              )}
            />
@@ -150,6 +180,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                       {...field}
                     />
                  </FormControl>
+                 <FormItem />
                </FormItem>
              )}
            />
@@ -169,6 +200,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                       {...field}
                     />
                  </FormControl>
+                 <FormItem />
                </FormItem>
              )}
            />
@@ -188,6 +220,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                       {...field}
                     />
                  </FormControl>
+                 <FormItem />
                </FormItem>
              )}
            />
