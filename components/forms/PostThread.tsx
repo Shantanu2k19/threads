@@ -7,6 +7,7 @@ import type * as z from 'zod' // using shadcn
 import { usePathname, useRouter } from 'next/navigation'
 import { ThreadValidation } from '@/lib/validations/thread'
 //import { updateUser } from '@/lib/actions/user.actions'
+import { createThread } from '@/lib/actions/thread.actions'
 
 import {
   Form,
@@ -48,10 +49,22 @@ function PostThread({ userId} : {userId: string}){
         }
     })
 
+    const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+      console.log("creating thread.."+values.thread);
+      await createThread({ 
+        text: values.thread,
+        author: userId,
+        communityId: null,
+        path: pathname
+      })
+
+      router.push("/")
+    }
+
     return (
         <Form {...form}>
         <form
-         className="flex flex-col justify-start gap-10"
+         className="mt-10 flex flex-col justify-start gap-10"
          onSubmit={form.handleSubmit(onSubmit)}
         >
              <FormField
@@ -73,6 +86,10 @@ function PostThread({ userId} : {userId: string}){
                </FormItem>
              )}
            />
+
+          <Button type="submit" className="bg-primary-500">
+            Post thread
+          </Button>
         </form>
         </Form>
     )
