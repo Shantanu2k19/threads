@@ -33,3 +33,6 @@ However, you can mark a folder as a Route Group to prevent the folder from being
 -allows you to organize your route segments and project files into logical groups without affecting the URL path structure.
 
 npm install mongodb
+
+
+ npx shadcn-ui@latest add tabs

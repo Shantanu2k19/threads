@@ -6,10 +6,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 // import { Console } from 'console'
-import { SignOutButton, SignedIn } from '@clerk/nextjs'
+import { SignOutButton, SignedIn, useAuth } from '@clerk/nextjs'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function LeftSidebar () {
+  const { userId } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
 
@@ -22,6 +23,8 @@ function LeftSidebar () {
               const isActive =
                 (pathname.includes(link.route) && link.route.length > 1) ||
                 pathname === link.route
+
+              if(link.route === '/profile') link.route=`${link.route}/${userId}`
 
               return (
                 <Link
