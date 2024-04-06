@@ -82,7 +82,7 @@ function PostThread({ userId} : {userId: string}){
                     {...field}
                     />
                  </FormControl>
-                 <FormItem />
+                 <FormMessage />
                </FormItem>
              )}
            />
