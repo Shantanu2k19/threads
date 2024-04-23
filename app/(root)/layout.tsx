@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from "@clerk/themes";
 
 import LeftSidebar from '@/components/shared/Lefisidebar'
 import Rightsidebar from '@/components/shared/Rightsidebar'
@@ -20,11 +21,19 @@ export const metadata = {
 
 export default function RootLayout ({
   children
+  //({ children }): This is known as object destructuring in JavaScript. 
+  //It extracts the children property from the object passed as an argument to the function.
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode  
+  //Readonly<{}>: This is a TypeScript utility type that creates an immutable version of an object. 
+  //It ensures that the properties of the object cannot be modified after creation.
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <Topbar />
@@ -39,7 +48,7 @@ export default function RootLayout ({
 
               <Rightsidebar />
             </main>
-          {children}
+
           <Bottombar />
         </body>
       </html>
