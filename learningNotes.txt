@@ -36,3 +36,10 @@ npm install mongodb
 
 
  npx shadcn-ui@latest add tabs
+
+Ctrl+Shift+[    Fold (collapse) region  editor.fold
+Ctrl+Shift+]    Unfold (uncollapse) region  editor.unfold
+Ctrl+K Ctrl+[   Fold (collapse) all subregions  editor.foldRecursively
+Ctrl+K Ctrl+]   Unfold (uncollapse) all subregions  editor.unfoldRecursively
+Ctrl+K Ctrl+0   Fold (collapse) all regions editor.foldAll
+Ctrl+K Ctrl+J   Unfold (uncollapse) all regions
